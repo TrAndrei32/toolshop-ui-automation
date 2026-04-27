@@ -4,5 +4,6 @@ class HomePage:
         self.signin_button = "[data-test=\"nav-sign-in\"]"
 
     def signin(self):
-        self.page.click(self.signin_button)
+        self.page.locator(self.signin_button).wait_for(state="visible")
+        self.page.locator(self.signin_button).click()
         self.page.wait_for_url("**/auth/login")
