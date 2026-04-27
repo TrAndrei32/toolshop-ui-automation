@@ -1,0 +1,39 @@
+name: Toolshop - UI - Tests
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+    workflow_dispatch:
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Set up Python
+              uses: actions/setup-python@v4
+              with:
+                python-version: "3.12"
+
+            - name: Install dependencies
+              run: pip install -r requirements.txt
+
+            - name: Install Chromium
+              run: playwright install chromium
+
+            - name: Run tests
+              run: pytest -v
+              env:
+                BASE_URL: ${{ secrets.BASE_URL }}
+                EMAIL: ${{ secrets.EMAIL }}
+                PASSWORD: ${{ secrets.PASSWORD }}
+                POSTAL_CODE: ${{ secrets.POSTAL_CODE }}
+                HOUSE_NUMBER: ${{ secrets.HOUSE_NUMBER }}
+
+
+
