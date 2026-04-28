@@ -27,13 +27,20 @@ jobs:
               run: playwright install chromium --with-deps
 
             - name: Run tests
-              run: pytest -v
+              run: pytest -v --screenshot=only-on-failure --output=test-results
               env:
                 BASE_URL: ${{ secrets.BASE_URL }}
                 EMAIL: ${{ secrets.EMAIL }}
                 PASSWORD: ${{ secrets.PASSWORD }}
                 POSTAL_CODE: ${{ secrets.POSTAL_CODE }}
                 HOUSE_NUMBER: ${{ secrets.HOUSE_NUMBER }}
+
+            - name: Upload screenshots
+              if: failure()
+              uses: actions/upload-artifact@v4
+              with:
+                name: test-results
+                path: test-results/  
 
 
 
