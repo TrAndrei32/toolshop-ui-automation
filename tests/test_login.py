@@ -7,7 +7,7 @@ import os
 class TestLogin:
     @pytest.mark.smoke
     def test_login_valid(self, page, base_url):
-        page.goto(base_url, wait_until="networkidle")
+        page.goto(base_url, wait_until="load")
         home_page = HomePage(page)
         home_page.signin()
         login_page = LoginPage(page)
@@ -18,7 +18,7 @@ class TestLogin:
 
     @pytest.mark.smoke
     def test_login_invalid(self, page, base_url):
-        page.goto(base_url, wait_until="networkidle")
+        page.goto(base_url, wait_until="load")
         home_page = HomePage(page)
         home_page.signin()
         login_page = LoginPage(page)

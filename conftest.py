@@ -16,7 +16,7 @@ def base_url():
 def logged_in_page(page):
     from pages.home_page import HomePage
     from pages.login_page import LoginPage
-    page.goto(BASE_URL, wait_until="networkidle")
+    page.goto(BASE_URL, wait_until="load")
     home_page = HomePage(page)
     home_page.signin()
     login_page = LoginPage(page)
