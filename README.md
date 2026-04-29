@@ -82,3 +82,23 @@ HOUSE_NUMBER=your_house_number
 The project includes a GitHub Actions pipeline configured to run on every push and pull request to `main`.
 
 > **Note:** The CI pipeline is configured but cannot execute successfully on GitHub-hosted runners. `practicesoftwaretesting.com` uses Cloudflare bot protection, which detects datacenter IPs (such as GitHub Actions servers) and displays a "Verify you are human" challenge page instead of the actual site. All tests pass when run locally.
+
+## Docker
+
+The project is fully containerized and can be run without any local Python or Playwright setup.
+
+### Prerequisites
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running
+
+### Build the image
+
+```bash
+docker build -t toolshop-tests .
+```
+
+### Run the tests
+
+```bash
+docker run --env-file .env toolshop-tests
+```
